@@ -67,6 +67,20 @@ window.addEventListener('resize', () =>
 })
 
 /**
+ * Cursor
+ */
+
+const mouse = new THREE.Vector2() // Vector 2 because its just about X and Y
+
+window.addEventListener('mousemove', (_event) =>
+{
+    mouse.x = _event.clientX / sizes.width * 2 - 1 // calcul to get normalize values on X axe
+    mouse.y = - (_event.clientY / sizes.width) * 2 + 1 // calcul to get normalize values on Y axe
+    console.log(mouse);
+})
+
+
+/**
  * Camera
  */
 // Base camera
