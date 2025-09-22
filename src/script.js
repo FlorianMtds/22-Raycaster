@@ -76,7 +76,6 @@ window.addEventListener('mousemove', (_event) =>
 {
     mouse.x = _event.clientX / sizes.width * 2 - 1 // calcul to get normalize values on X axe
     mouse.y = - (_event.clientY / sizes.width) * 2 + 1 // calcul to get normalize values on Y axe
-    console.log(mouse);
 })
 
 
@@ -115,21 +114,20 @@ const tick = () =>
     object2.position.y = Math.sin(elapsedTime * 0.8) * 1.5
     object3.position.y = Math.sin(elapsedTime * 1.5) * 1.5
 
-    const rayOrigin = new THREE.Vector3(-3, 0, 0)
-    const rayDirection = new THREE.Vector3(1, 0, 0)
-    rayDirection.normalize()
-    raycaster.set(rayOrigin, rayDirection)
+    // Cast a ray
+    raycaster.setFromCamera(mouse, camera)
 
     const objectsToTest = [object1, object2, object3]
-    const interstects = raycaster.intersectObjects(objectsToTest)
+    const intersects = raycaster.intersectObjects(objectsToTest)
 
-    for (const object of objectsToTest)
+    for(const object of objectsToTest)
     {
         object.material.color.set('#ff0000')
     }
-    for (const interstect of interstects)
+
+    for(const intersect of intersects)
     {
-        interstect.object.material.color.set('#0000ff')
+        intersect.object.material.color.set('#0000ff')
     }
 
     // Update controls
